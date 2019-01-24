@@ -1,3 +1,4 @@
 /webroot
 /.DS_Store
 /db
+/mongodb
