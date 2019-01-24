@@ -1,0 +1,43 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: DockerFile
+      args:
+        - USER_ID=1000
+    volumes:
+      - ./webroot:/webroot:cached
+    ports:
+      - 8080:80
+    depends_on:
+      - db
+  mongodb:
+    image: mongo
+    restart: always
+    volumes:
+      - ./mongodb:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: toor
+    ports:
+      - 27019:27017
+  db:
+    image: mariadb
+    volumes:
+      - ./db:/var/lib/mysql:cached
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: db
+      MYSQL_PASSWORD: db
+      MYSQL_DATABASE: db
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8181:80
+    depends_on:
+      - db
+  mailcatcher:
+    image: schickling/mailcatcher
+    ports:
+      - 1080:1080
