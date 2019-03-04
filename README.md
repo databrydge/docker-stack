@@ -14,7 +14,7 @@ In this way you can easily test your projects without accidentally sending email
 # Usage
 1. Download or checkout this repository.
 2. Open a terminal and navigate to the skeleton.
-3. run `docker-compose up --build` or `docker-compose up -r` to run in background after first build
+3. run `docker-compose up --build` or `docker-compose up -d` to run in background after first build
 4. After docker completed downloading all images, the services will run
 5. Download databrydge_aws in the data directory.
 6. If you want to run commands in the app container use command `
