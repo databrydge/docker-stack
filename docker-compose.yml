@@ -1,5 +1,15 @@
 version: '3'
 services:
+  console:
+    container_name: "dbg_console"
+    build:
+      context: ./console
+    volumes:
+      - ./data/dataswitcher_aws:/dataswitcher:cached
+    depends_on:
+      - mariadb
+      - mongodb
+    command: tail -f /dev/null
   web:
     container_name: "dbg_web"
     build: 
@@ -7,7 +17,7 @@ services:
       args:
         - USER_ID=10000
     volumes:
-      - ./data/databrydge_aws:/project:cached
+      - ./data/dataswitcher_aws:/project:cached
     ports:
       - 80:80
       - 443:443
