@@ -23,9 +23,7 @@ RUN curl -sSL https://github.com/krakjoe/pthreads/archive/master.zip -o /tmp/pth
     && rm -rf /tmp/pthreads*
 
 # enable pthreads and other modules
-RUN docker-php-ext-install pcntl
-RUN docker-php-ext-install mysqli
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql mysqli pcntl iconv
 
 # memory limit
 RUN echo 'memory_limit = 2048M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
