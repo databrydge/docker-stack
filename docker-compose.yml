@@ -6,6 +6,7 @@ services:
       context: ./console
     volumes:
       - ./data/dataswitcher_aws:/dataswitcher:cached
+      - ./data/databrydge_aws:/databrydge:cached
     depends_on:
       - mariadb
       - mongodb
@@ -17,7 +18,8 @@ services:
       args:
         - USER_ID=10000
     volumes:
-      - ./data/dataswitcher_aws:/project:cached
+      - ./data/dataswitcher_aws:/var/www/html/dataswitcher_aws/
+      - ./data/databrydge_aws:/var/www/html/databrydge_aws/
     ports:
       - 80:80
       - 443:443
@@ -33,14 +35,17 @@ services:
       - ./data/mongodb:/data/db
     ports:
       - 27017:27017
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
+    command:
+      'mongod --smallfiles --logpath=/dev/null' # --quiet
   mariadb:
     container_name: "dbg_mariadb"
-    image: mariadb
+    image: mariadb:10.3
     volumes:
-      - ./data/mysql:/var/lib/mysql:cached
+      - ./var/mariadb:/var/lib/mysql:cached
     ports:
       - 3306:3306
+    command:
+      'mysqld --innodb-flush-method=fsync'
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: db
@@ -53,6 +58,11 @@ services:
       - 8180:80
     depends_on: 
       - mariadb
+    links:
+      - mariadb
+    environment:
+      PMA_PORT: 3306
+      PMA_HOST: mariadb
   mailcatcher:
     container_name: "dbg_mailcatcher"
     image: schickling/mailcatcher

@@ -1,16 +1,20 @@
 FROM webdevops/php-apache:7.2
 
 # set env
-ENV WEB_DOCUMENT_ROOT /project/web/
 ENV WEB_DOCUMENT_INDEX index.php
 
 # copy php ini
 COPY php.ini $PHP_INI_DIR/conf.d/zz-php.ini
+COPY vhosts.conf /opt/docker/etc/httpd/vhost.conf
 
 # install extra packages
 RUN apt-get update; \
 	pecl install mongodb;\
 	apt-get install openssl libssl-dev libcurl4-openssl-dev -y;
+
+RUN apt-get update && apt-get install -y wget git unzip \
+    && pecl install xdebug-2.6.1 \
+    && docker-php-ext-enable xdebug
 
 # enable apache mods.
 RUN a2enmod rewrite
@@ -20,4 +24,3 @@ RUN service apache2 restart
 # set arguments and start
 ARG USER_ID
 RUN usermod -u $USER_ID www-data
-
