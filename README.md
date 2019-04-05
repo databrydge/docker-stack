@@ -23,7 +23,7 @@ In this way you can easily test your projects without accidentally sending email
    
 7. After docker completed downloading all images, the services will run
 8. Download databrydge_aws and dataswitcher_aws in the data directory.
-9. If you want to run commands in the app container use command `docker exec -i -t dbg_web bash` to open a terminal open within the docker container. Then `cd project` to switch to the working project folder. From there run commands as if on a local environment.
+9. If you want to run commands in the app container use command `docker exec -i -t dbg_console bash` to open a terminal open within the docker container. Then use `cd` to switch to the working project folder. From there run commands as if on a local environment.
 10. To connect to mysql within the application use as ip address `mariadb`, for mongodb use `mongodb`
 11. To connect to mysql / mongodb from outside the docker application use `localhost` / `127.0.0.1` 
 
