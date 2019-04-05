@@ -32,7 +32,7 @@ services:
     environment:
       - MONGO_LOG_DIR=/dev/null
     volumes:
-      - ./data/mongodb:/data/db
+      - mongodata
     ports:
       - 27017:27017
     command:

@@ -15,12 +15,17 @@ In this way you can easily test your projects without accidentally sending email
 1. Download or checkout this repository.
 2. In the "Data" directory download the DataBrydge_AWS repository.
 3. Open a terminal and navigate to the skeleton.
-4. run `docker-compose up --build` or `docker-compose up -d` to run in background after first build
-5. After docker completed downloading all images, the services will run
-6. Download databrydge_aws in the data directory.
-7. If you want to run commands in the app container use command `docker exec -i -t dbg_web bash` to open a terminal open within the docker container. Then `cd project` to switch to the working project folder. From there run commands as if on a local environment.
-8. To connect to mysql within the application use as ip address `mariadb`, for mongodb use `mongodb`
-8. To connect to mysql / mongodb from outside the docker application use `localhost` / `127.0.0.1` 
+4. Create volume for mongodb `docker volume create --name=mongodata`
+5. run `docker-compose up --build` or `docker-compose up -d` to run in background after first build
+6. Windows. Need to add to hosts file 
+   - 127.0.0.1 databrydge.test
+   - 127.0.0.1 dataswitcher.test
+   
+7. After docker completed downloading all images, the services will run
+8. Download databrydge_aws and dataswitcher_aws in the data directory.
+9. If you want to run commands in the app container use command `docker exec -i -t dbg_web bash` to open a terminal open within the docker container. Then `cd project` to switch to the working project folder. From there run commands as if on a local environment.
+10. To connect to mysql within the application use as ip address `mariadb`, for mongodb use `mongodb`
+11. To connect to mysql / mongodb from outside the docker application use `localhost` / `127.0.0.1` 
 
 # Configuration
 ## Database
