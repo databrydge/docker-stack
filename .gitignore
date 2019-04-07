@@ -1,5 +1,8 @@
 /data/*
 !/data/.gitignore
+/var/*
+!/var/.gitignore
 webroot/*
 .idea/*
 .DS_Store
+.vs/*
