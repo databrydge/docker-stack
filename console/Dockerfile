@@ -22,11 +22,39 @@ RUN curl -sSL https://github.com/krakjoe/pthreads/archive/master.zip -o /tmp/pth
     && make install \
     && rm -rf /tmp/pthreads*
 
+RUN apk add --no-cache \
+    bzip2 \
+    bzip2-dev \
+    curl-dev
+
 # enable pthreads and other modules
-RUN docker-php-ext-install pdo pdo_mysql mysqli pcntl iconv
+RUN docker-php-ext-install pdo pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql soap zip
+
+RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
+  docker-php-ext-configure gd \
+    --with-gd \
+    --with-freetype-dir=/usr/include/ \
+    --with-png-dir=/usr/include/ \
+    --with-jpeg-dir=/usr/include/ && \
+  NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
+  docker-php-ext-install -j${NPROC} gd && \
+  apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 # memory limit
-RUN echo 'memory_limit = 2048M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
+RUN echo 'memory_limit = 3072M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
+
+# install composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
+
+# install git
+RUN apk add --no-cache git
+
+# set timezone
+RUN apk add -U tzdata && \
+    cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+
+# set error logging
+RUN echo "php_admin_value[error_reporting] = E_ALL & ~E_NOTICE & ~E_WARNING & ~E_STRICT & ~E_DEPRECATED">>/usr/local/etc/php/www.conf
 
 # fuck
 RUN docker-php-ext-enable pthreads

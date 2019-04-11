@@ -13,19 +13,19 @@ In this way you can easily test your projects without accidentally sending email
 
 # Usage
 1. Download or checkout this repository.
-2. In the "Data" directory download the DataBrydge_AWS repository.
-3. Open a terminal and navigate to the skeleton.
-4. Create volume for mongodb `docker volume create --name=mongodata`
-5. run `docker-compose up --build` or `docker-compose up -d` to run in background after first build
-6. Windows. Need to add to hosts file 
-   - 127.0.0.1 databrydge.test
-   - 127.0.0.1 dataswitcher.test
+2. Open a terminal and navigate to the skeleton.
+3. run `docker-compose up --build` or `docker-compose up -d` to run in background after first build
+4. Windows. Need to add to hosts file 
+   - 127.11.0.1 databrydge.test
+   - 127.11.0.1 dataswitcher.test
    
-7. After docker completed downloading all images, the services will run
-8. Download databrydge_aws and dataswitcher_aws in the data directory.
-9. If you want to run commands in the app container use command `docker exec -i -t dbg_console bash` to open a terminal open within the docker container. Then use `cd` to switch to the working project folder. From there run commands as if on a local environment.
+5. After docker completed downloading all images, the services will run
+6. Download or git clone databrydge_aws and/or dataswitcher_aws in the data directory.
+7. Run `composer install` within the console container, start with: `docker-compose exec console sh`, then use `cd databrydge`.
+8. Copy the .env.example to .env 
+9. If you want to run commands in the app container use command `docker-compose exec console sh` to open a terminal open within the docker container. Then use `cd` to switch to the working project folder. From there run commands as if on a local environment.
 10. To connect to mysql within the application use as ip address `mariadb`, for mongodb use `mongodb`
-11. To connect to mysql / mongodb from outside the docker application use `localhost` / `127.0.0.1` 
+11. To connect to mysql / mongodb from outside the docker application use `127.11.0.1` 
 
 # Configuration
 ## Database
@@ -48,7 +48,7 @@ The default configuration for the database is as follows:
 Docker compose will start the following services
 You can access these services from a browser.
 For example:
-http://localhost:80 for the webserver
+http://127.11.0.1:80 for the webserver
 
 1. The webserver (port: 80)
 2. Phpmyadmin (port: 8181)
