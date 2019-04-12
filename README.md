@@ -27,6 +27,24 @@ Other handy tools on Mac:
 4. Dash for documentation PHP / Yii2
 5. 1Password for password management
 
+# Integration with phpStorm
+
+It's handy to start processes like cron/jobs straight from phpStorm. This is really easy if you use a very good IDE like phpStorm.
+
+To do this follow these steps:
+
+1. Go to preferences
+2. Go to languages / frameworks > PHP > and click the three ... next to CLI interpreter
+3. Click the plus button and select: "From Docker, Vagrant, VM, remote"
+4. Select Docker Compose and select your docker-compose.yml file. Also select the console service
+5. It will check the settings and connection to Docker. **Make sure to select ""Connect to existing container (docker-compose exec)**
+6. Close the settings page and in the right top click "Edit configurations"
+7. Add a new PHP script and point the path to the full path to your /yii file, ie. /Users/alex/Docker/data/databrydge_aws/yii
+8. Set arguments for instance to cron/jobs
+9. Click apply, you can run now and it will run inside the container directly. Keyboard shortcuts are ⌃(ctrl) + D for debug mode and ⌃(ctrl) + D for regular run mode
+
+Added bonus is that you also have a nice debug button now (if you implemented XDebug) You can either run it in debug mode and then it will automatically hit the breakpoints without you clicking the listen button.
+
 # XDebug
 
 XDebug is only installed into the console container. Since most of the work is done there. It actually works by opening up a port on your host machine (we use 10000 to prevent conflicts with PHP FPM if we want to use web container too). It then listens for incoming connections from the console container. 
