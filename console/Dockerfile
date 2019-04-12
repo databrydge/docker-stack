@@ -45,7 +45,18 @@ RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev lib
   apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
 # memory limit
-RUN echo 'memory_limit = 3072M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
+RUN echo 'memory_limit=3072M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
+
+# xdebug settings
+RUN echo 'xdebug.idekey=phpstorm' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'xdebug.remote_autostart=1' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'xdebug.remote_enable=1' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'xdebug.default_enable=0' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'xdebug.remote_host=host.docker.internal' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'xdebug.remote_port=10000' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'xdebug.remote_connect_back=1' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'xdebug.profiler_enable=0' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'xdebug.remote_log="/tmp/xdebug.log"' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
 
 # set pem file location
 RUN echo 'curl.cainfo = /usr/local/share/ca-certificates/cacert.pem' >> /usr/local/etc/php/conf.d/docker-php-cacert.ini;

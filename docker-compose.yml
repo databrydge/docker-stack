@@ -22,7 +22,8 @@ services:
     networks:
       - dbg
     command: tail -f /dev/null
-
+    environment:
+      PHP_IDE_CONFIG: "serverName=xdebug.test"
   #Web
   web:
     container_name: dbg_web
