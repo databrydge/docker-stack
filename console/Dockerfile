@@ -12,8 +12,9 @@ RUN apk update && apk add --no-cache \
     g++ make autoconf \
     libxml2-dev icu-dev curl-dev pcre-dev
 
-# install mongodb
+# install mongodb & xdebug
 RUN pecl install mongodb && docker-php-ext-enable mongodb
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # install pthreads
 RUN curl -sSL https://github.com/krakjoe/pthreads/archive/master.zip -o /tmp/pthreads.zip \
@@ -31,7 +32,7 @@ RUN apk add --no-cache \
     curl-dev
 
 # enable pthreads and other modules
-RUN docker-php-ext-install pdo pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql soap zip xdebug
+RUN docker-php-ext-install pdo pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql soap zip
 
 RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
   docker-php-ext-configure gd \
