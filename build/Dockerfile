@@ -3,6 +3,9 @@ FROM webdevops/php-apache:7.2
 # set env
 ENV WEB_DOCUMENT_INDEX index.php
 
+# add pem file to system
+RUN  wget http://curl.haxx.se/ca/cacert.pem -P /usr/local/share/ca-certificates/
+
 # copy php ini
 COPY php.ini $PHP_INI_DIR/conf.d/zz-php.ini
 COPY vhosts.conf /opt/docker/etc/httpd/vhost.conf

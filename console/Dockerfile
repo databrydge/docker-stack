@@ -3,6 +3,9 @@ FROM php:7.2.16-zts-alpine3.9
 # install bash
 RUN apk update && apk add bash vim
 
+# add pem file to system
+RUN  wget http://curl.haxx.se/ca/cacert.pem -P /usr/local/share/ca-certificates/
+
 # install stuff for make pthreads
 RUN apk update && apk add --no-cache \
     sudo bash \
@@ -42,6 +45,9 @@ RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev lib
 
 # memory limit
 RUN echo 'memory_limit = 3072M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
+
+# set pem file location
+RUN echo 'curl.cainfo = /usr/local/share/ca-certificates/cacert.pem' >> /usr/local/etc/php/conf.d/docker-php-cacert.ini;
 
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer
