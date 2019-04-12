@@ -15,9 +15,7 @@ RUN apt-get update; \
 	pecl install mongodb;\
 	apt-get install openssl libssl-dev libcurl4-openssl-dev -y;
 
-RUN apt-get update && apt-get install -y wget git unzip \
-    && pecl install xdebug-2.6.1 \
-    && docker-php-ext-enable xdebug
+RUN apt-get update && apt-get install -y wget git unzip;
 
 # enable apache mods.
 RUN a2enmod rewrite

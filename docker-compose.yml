@@ -34,8 +34,8 @@ services:
       - ./data/dataswitcher_aws:/var/www/html/dataswitcher_aws/
       - ./data/databrydge_aws:/var/www/html/databrydge_aws/
     ports:
-      - 127.11.0.1:80:80
-      - 127.11.0.1:443:443
+      - 127.0.0.1:80:80
+      - 127.0.0.1:443:443
     depends_on: 
       - mariadb
       - mongodb
@@ -51,7 +51,7 @@ services:
     volumes:
       - mongo-data:/data/db
     ports:
-      - 127.11.0.1:27017:27017
+      - 127.0.0.1:27017:27017
     networks:
       - dbg
     command:
@@ -64,7 +64,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     ports:
-      - 127.11.0.1:3306:3306
+      - 127.0.0.1:3306:3306
     networks:
       - dbg
     command:
@@ -80,7 +80,7 @@ services:
     container_name: dbg_phpmyadmin
     image: phpmyadmin/phpmyadmin
     ports:
-      - 127.11.0.1:8180:80
+      - 127.0.0.1:8180:80
     networks:
       - dbg
     depends_on: 
@@ -90,12 +90,3 @@ services:
     environment:
       PMA_PORT: 3306
       PMA_HOST: mariadb
-
-  #Mailcatcher
-  mailcatcher:
-    container_name: dbg_mailcatcher
-    image: schickling/mailcatcher
-    ports:
-      - 127.11.0.1:1080:1080
-    networks:
-      - dbg
