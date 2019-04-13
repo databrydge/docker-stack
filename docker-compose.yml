@@ -14,8 +14,8 @@ services:
     build:
       context: ./console
     volumes:
-      - ./data/dataswitcher_aws:/dataswitcher
-      - ./data/databrydge_aws:/databrydge
+      - ./data/dataswitcher_aws:/dataswitcher:cached
+      - ./data/databrydge_aws:/databrydge:cached
     depends_on:
       - mariadb
       - mongodb
@@ -32,8 +32,8 @@ services:
       args:
         - USER_ID=10000
     volumes:
-      - ./data/dataswitcher_aws:/var/www/html/dataswitcher_aws/
-      - ./data/databrydge_aws:/var/www/html/databrydge_aws/
+      - ./data/dataswitcher_aws:/var/www/html/dataswitcher_aws/:cached
+      - ./data/databrydge_aws:/var/www/html/databrydge_aws/:cached
     ports:
       - 127.0.0.1:80:80
       - 127.0.0.1:443:443
