@@ -6,6 +6,22 @@ docker skeleton for creating a controlled environment for php applications
 - Docker (https://www.docker.com/products/docker)
 - A pack of cigarettes
 
+
+# Usage
+1. Download or checkout this repository.
+2. Open a terminal and navigate to the skeleton.
+3. run `docker-compose up --build` or `docker-compose up -d` to run in background after first build
+4. You need to add the following entries to your hosts file:
+   - 127.0.0.1 databrydge.test
+   - 127.0.0.1 dataswitcher.test
+5. After docker completed downloading all images, the services will run
+6. Download or git clone databrydge_aws and/or dataswitcher_aws in the data directory.
+7. Run `composer install` within the console container, start with: `docker-compose exec console sh`, then use `cd databrydge`
+8. Copy the .env.example to .env 
+9. If you want to run commands in the app container use command `docker-compose exec console sh` to open a terminal open within the docker container. Then use `cd` to switch to the working project folder. From there run commands as if on a local environment. If you are on the next level of Docker you can also use: `docker-compose exec console /databrydge/yii cron/jobs` to execute directly in the container without invoking a shell 
+10. To connect to mysql within the application use as ip address `dbg_mariadb`, for mongodb use `dbg_mongodb`
+11. To connect to mysql / mongodb from outside the docker application use `127.0.0.1` 
+
 # Extra stack
 
 For a code editor use either:
@@ -87,21 +103,6 @@ And the script should stop at the breakpoint.
 Instructions for Visual Studio Code should be similar. The real significant step is to make sure the paths on your local machine are mapped to the paths inside the docker containers. phpStorm does this by using the "servers" setting.
 
 You should install [this plugin](https://github.com/felixfbecker/vscode-php-debug) anyway for VisualCode (update these steps with pictures when you are setting up for VisualCode please!). The variable you should look at in this case is pathMappings.
-
-# Usage
-1. Download or checkout this repository.
-2. Open a terminal and navigate to the skeleton.
-3. run `docker-compose up --build` or `docker-compose up -d` to run in background after first build
-4. You need to add the following entries to your hosts file:
-   - 127.0.0.1 databrydge.test
-   - 127.0.0.1 dataswitcher.test
-5. After docker completed downloading all images, the services will run
-6. Download or git clone databrydge_aws and/or dataswitcher_aws in the data directory.
-7. Run `composer install` within the console container, start with: `docker-compose exec console sh`, then use `cd databrydge`
-8. Copy the .env.example to .env 
-9. If you want to run commands in the app container use command `docker-compose exec console sh` to open a terminal open within the docker container. Then use `cd` to switch to the working project folder. From there run commands as if on a local environment. If you are on the next level of Docker you can also use: `docker-compose exec console /databrydge/yii cron/jobs` to execute directly in the container without invoking a shell 
-10. To connect to mysql within the application use as ip address `dbg_mariadb`, for mongodb use `dbg_mongodb`
-11. To connect to mysql / mongodb from outside the docker application use `127.0.0.1` 
 
 # Configuration
 
