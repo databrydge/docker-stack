@@ -44,6 +44,9 @@ RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev lib
   docker-php-ext-install -j${NPROC} gd && \
   apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
 
+# display errors
+RUN echo 'display_errors=on' >> /usr/local/etc/php/conf.d/docker-php-display-errors.ini;
+
 # memory limit
 RUN echo 'memory_limit=3072M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
 
@@ -72,7 +75,7 @@ RUN apk add -U tzdata && \
     cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 
 # set error logging
-RUN echo "php_admin_value[error_reporting] = E_ALL & ~E_NOTICE & ~E_WARNING & ~E_STRICT & ~E_DEPRECATED">>/usr/local/etc/php/www.conf
+RUN echo "php_admin_value[error_reporting] = E_ALL">>/usr/local/etc/php/www.conf
 
 # fuck
 RUN docker-php-ext-enable pthreads
