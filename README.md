@@ -11,12 +11,12 @@ docker skeleton for creating a controlled environment for php applications
 1. Download or checkout this repository.
 2. Open a terminal and navigate to the skeleton.
 3. run `docker-compose up --build` or `docker-compose up -d` to run in background after first build
-4. You need to add the following entries to your /etc/hosts file:
+4. After docker completed downloading all images, the services will run
+5. You need to add the following entries to your /etc/hosts file:
    - 127.0.0.1 databrydge.test
    - 127.0.0.1 dataswitcher.test
-5. After docker completed downloading all images, the services will run
 6. Download or git clone databrydge_aws and/or dataswitcher_aws in the data directory.
-7. Run `composer install` within the console container, start with: `docker exec -i -t dbg_console sh`, then use `cd databrydge`
+7. Enter the console container, start with: `docker exec -i -t dbg_console sh`, then use `cd databrydge`, run `composer install`
 8. Copy the .env.example to .env 
 9. If you want to run commands in the app container use command `docker-compose exec console sh` to open a terminal open within the docker container. Then use `cd` to switch to the working project folder. From there run commands as if on a local environment. If you are on the next level of Docker you can also use: `docker-compose exec console /databrydge/yii cron/jobs` to execute directly in the container without invoking a shell 
 10. To connect to mysql within the application use as ip address `dbg_mariadb`, for mongodb use `dbg_mongodb`

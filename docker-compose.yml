@@ -35,8 +35,8 @@ services:
       - ./data/dataswitcher_aws:/var/www/html/dataswitcher_aws/:cached
       - ./data/databrydge_aws:/var/www/html/databrydge_aws/:cached
     ports:
-      - 127.0.0.1:80:80
-      - 127.0.0.1:443:443
+      - 80:80
+      - 443:443
     depends_on: 
       - mariadb
       - mongodb
@@ -52,7 +52,7 @@ services:
     volumes:
       - mongo-data:/data/db
     ports:
-      - 127.0.0.1:27017:27017
+      - 27017:27017
     networks:
       - dbg
     command:
@@ -65,7 +65,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     ports:
-      - 127.0.0.1:3306:3306
+      - 3306:3306
     networks:
       - dbg
     command:
@@ -81,7 +81,7 @@ services:
     container_name: dbg_phpmyadmin
     image: phpmyadmin/phpmyadmin
     ports:
-      - 127.0.0.1:8180:80
+      - 8180:80
     networks:
       - dbg
     depends_on: 
