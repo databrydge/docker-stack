@@ -8,9 +8,9 @@ RUN  wget http://curl.haxx.se/ca/cacert.pem -P /usr/local/share/ca-certificates/
 
 # install stuff for make pthreads
 RUN apk update && apk add --no-cache \
-    sudo bash \
-    g++ make autoconf \
-    libxml2-dev icu-dev curl-dev pcre-dev
+  sudo bash \
+  g++ make autoconf \
+  libxml2-dev icu-dev curl-dev pcre-dev
 
 # install mongodb & xdebug
 RUN pecl install mongodb && docker-php-ext-enable mongodb
@@ -18,28 +18,28 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # install pthreads
 RUN curl -sSL https://github.com/krakjoe/pthreads/archive/master.zip -o /tmp/pthreads.zip \
-    && unzip /tmp/pthreads.zip -d /tmp \
-    && cd /tmp/pthreads-* \
-    && phpize \
-    && ./configure \
-    && make \
-    && make install \
-    && rm -rf /tmp/pthreads*
+  && unzip /tmp/pthreads.zip -d /tmp \
+  && cd /tmp/pthreads-* \
+  && phpize \
+  && ./configure \
+  && make \
+  && make install \
+  && rm -rf /tmp/pthreads*
 
 RUN apk add --no-cache \
-    bzip2 \
-    bzip2-dev \
-    curl-dev
+  bzip2 \
+  bzip2-dev \
+  curl-dev
 
 # enable pthreads and other modules
 RUN docker-php-ext-install pdo pcntl bcmath bz2 calendar iconv intl mbstring mysqli opcache pdo_mysql soap zip sockets
 
 RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev libjpeg-turbo-dev && \
   docker-php-ext-configure gd \
-    --with-gd \
-    --with-freetype-dir=/usr/include/ \
-    --with-png-dir=/usr/include/ \
-    --with-jpeg-dir=/usr/include/ && \
+  --with-gd \
+  --with-freetype-dir=/usr/include/ \
+  --with-png-dir=/usr/include/ \
+  --with-jpeg-dir=/usr/include/ && \
   NPROC=$(grep -c ^processor /proc/cpuinfo 2>/dev/null || 1) && \
   docker-php-ext-install -j${NPROC} gd && \
   apk del --no-cache freetype-dev libpng-dev libjpeg-turbo-dev
@@ -70,9 +70,14 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin -
 # install git
 RUN apk add --no-cache git
 
+#Bash Aliases
+RUN echo 'alias c="clear"' >> ~/.bashrc
+RUN echo 'alias cdb="cd /databrydge"' >> ~/.bashrc
+RUN echo 'alias cds="cd /dataswitcher"' >> ~/.bashrc
+
 # set timezone
 RUN apk add -U tzdata && \
-    cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
+  cp /usr/share/zoneinfo/Europe/Amsterdam /etc/localtime
 
 # set error logging
 RUN echo "php_admin_value[error_reporting] = E_ALL">>/usr/local/etc/php/www.conf
