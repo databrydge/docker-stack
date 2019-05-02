@@ -11,7 +11,7 @@ docker skeleton for creating a controlled environment for php applications
 1. Download or checkout this repository.
 2. Open a terminal and navigate to the skeleton.
 3. run `docker-compose up --build` or `docker-compose up -d` to run in background after first build
-4. You need to add the following entries to your hosts file:
+4. You need to add the following entries to your /etc/hosts file:
    - 127.0.0.1 databrydge.test
    - 127.0.0.1 dataswitcher.test
 5. After docker completed downloading all images, the services will run
