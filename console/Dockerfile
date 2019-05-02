@@ -52,7 +52,7 @@ RUN echo 'memory_limit=3072M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.i
 
 # xdebug settings
 RUN echo 'xdebug.idekey=phpstorm' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
-RUN echo 'xdebug.remote_autostart=0' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'xdebug.remote_autostart=1' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
 RUN echo 'xdebug.remote_enable=1' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
 RUN echo 'xdebug.default_enable=0' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
 RUN echo 'xdebug.remote_host=host.docker.internal' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
