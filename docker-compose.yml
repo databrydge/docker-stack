@@ -24,6 +24,20 @@ services:
     command: tail -f /dev/null
     environment:
       PHP_IDE_CONFIG: "serverName=xdebug.test"
+  #Console
+  console_test:
+    container_name: dbg_console_test
+    build:
+      context: ./console_test
+    volumes:
+      - ./data/dataswitcher_aws:/dataswitcher:cached
+      - ./data/databrydge_aws:/databrydge:cached
+    depends_on:
+      - mariadb
+      - mongodb
+    networks:
+      - dbg
+    command: tail -f /dev/null  
   #Web
   web:
     container_name: dbg_web
@@ -35,8 +49,8 @@ services:
       - ./data/dataswitcher_aws:/var/www/html/dataswitcher_aws/:cached
       - ./data/databrydge_aws:/var/www/html/databrydge_aws/:cached
     ports:
-      - 80:80
-      - 443:443
+      - 127.0.0.1:80:80
+      - 127.0.0.1:443:443
     depends_on: 
       - mariadb
       - mongodb
@@ -52,7 +66,7 @@ services:
     volumes:
       - mongo-data:/data/db
     ports:
-      - 27017:27017
+      - 127.0.0.1:27017:27017
     networks:
       - dbg
     command:
@@ -65,7 +79,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 127.0.0.1:3306:3306
     networks:
       - dbg
     command:
@@ -75,13 +89,12 @@ services:
       MYSQL_USER: db
       MYSQL_PASSWORD: db
       MYSQL_DATABASE: db
-
   #PhpMyAdmin
   phpmyadmin:
     container_name: dbg_phpmyadmin
     image: phpmyadmin/phpmyadmin
     ports:
-      - 8180:80
+      - 127.0.0.1:8180:80
     networks:
       - dbg
     depends_on: 
