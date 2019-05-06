@@ -45,6 +45,7 @@ RUN apk add --no-cache freetype libpng libjpeg-turbo freetype-dev libpng-dev lib
 
 # display errors
 RUN echo 'display_errors=on' >> /usr/local/etc/php/conf.d/docker-php-display-errors.ini;
+RUN echo 'error_reporting=E_ALL' >> /usr/local/etc/php/conf.d/docker-php-display-errors.ini;
 
 # memory limit
 RUN echo 'memory_limit=3072M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
