@@ -1,2 +1,1 @@
-sudo docker-compose up -d 
-sudo chown -R $USER:$USER $(pwd)/
+docker-compose up --build
