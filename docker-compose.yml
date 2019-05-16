@@ -104,3 +104,12 @@ services:
     environment:
       PMA_PORT: 3306
       PMA_HOST: mariadb
+  #Mailcatcher
+  mailcatcher:
+    container_name: dbg_mailcatcher
+    image: schickling/mailcatcher
+    ports:
+      - 1080:1080
+      - 1025:1025
+    networks:
+      - dbg
