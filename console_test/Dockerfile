@@ -63,6 +63,7 @@ RUN apk add --no-cache git
 RUN echo 'alias c="clear"' >> ~/.bashrc
 RUN echo 'alias cdb="cd /databrydge"' >> ~/.bashrc
 RUN echo 'alias cds="cd /dataswitcher"' >> ~/.bashrc
+RUN echo 'alias php-ycj="php yii cron/jobs"' >> ~/.bashrc
 
 # set timezone
 RUN apk add -U tzdata && \
