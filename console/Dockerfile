@@ -3,6 +3,10 @@ FROM php:7.2.16-zts-alpine3.9
 # install bash
 RUN apk update && apk add bash vim
 
+# fix work iconv library with alphine
+RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community/ --allow-untrusted gnu-libiconv
+ENV LD_PRELOAD /usr/lib/preloadable_libiconv.so php
+
 # add pem file to system
 RUN  wget http://curl.haxx.se/ca/cacert.pem -P /usr/local/share/ca-certificates/
 
