@@ -57,6 +57,7 @@ RUN echo 'memory_limit=3072M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.i
 
 # set pem file location
 RUN echo 'curl.cainfo = /usr/local/share/ca-certificates/cacert.pem' >> /usr/local/etc/php/conf.d/docker-php-cacert.ini;
+RUN echo 'date.timezone = "Europe/Amsterdam"'  > /usr/local/etc/php/conf.d/timezone.ini
 
 # install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin --filename=composer

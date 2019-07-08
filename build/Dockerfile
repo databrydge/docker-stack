@@ -28,3 +28,5 @@ RUN usermod -u $USER_ID www-data
 
 # we need this to trigger all errors just like production
 RUN echo 'error_reporting=E_ALL' >> /usr/local/etc/php/conf.d/docker-php-display-errors.ini;
+RUN echo 'date.timezone = "Europe/Amsterdam"'  > /usr/local/etc/php/conf.d/timezone.ini
+

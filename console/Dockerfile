@@ -65,6 +65,7 @@ RUN echo 'xdebug.remote_port=10000' >> /usr/local/etc/php/conf.d/docker-php-xdeb
 RUN echo 'xdebug.remote_connect_back=1' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
 RUN echo 'xdebug.profiler_enable=0' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
 RUN echo 'xdebug.remote_log="/tmp/xdebug.log"' >> /usr/local/etc/php/conf.d/docker-php-xdebug.ini;
+RUN echo 'date.timezone = "Europe/Amsterdam"'  > /usr/local/etc/php/conf.d/timezone.ini
 
 # set pem file location
 RUN echo 'curl.cainfo = /usr/local/share/ca-certificates/cacert.pem' >> /usr/local/etc/php/conf.d/docker-php-cacert.ini;
