@@ -79,7 +79,7 @@ services:
     networks:
       - dbg
     command:
-      'mongod --smallfiles --logpath=/dev/null' # --quiet
+      'mongod --logpath=/dev/null' # --quiet
 
   #MariaDB
   mariadb:
